@@ -1,7 +1,8 @@
 import React from 'react';
 import {  CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
-import action from '../../store/action';
+import { Link } from 'react-router-dom';
+import { action } from '../../store/header';
 import {
     HeaderWraper,
     Logo,
@@ -25,7 +26,9 @@ const Header = (props) => {
                 <Logo />
                 <Center>
                     <CenterLeft>
-                        <IndexPage>首页</IndexPage>
+                        <IndexPage>
+                            <Link to='/'>首页</Link>
+                        </IndexPage>
                         <DownLoad>下载App</DownLoad>
                         <SearchWrap>
                             <CSSTransition
@@ -59,4 +62,4 @@ const Header = (props) => {
     )
 }
 
-export default connect((state) => ({isFocus: state.header.isFocus}),action.header)(Header)
+export default connect((state) => ({isFocus: state.header.isFocus}),action)(Header)

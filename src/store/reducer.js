@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import header from './header/header';
+import { header } from './header';
 const reducer = combineReducers({
     header
 })
