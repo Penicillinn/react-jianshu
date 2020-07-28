@@ -16,10 +16,69 @@ import {
     CenterRight,
     Aa,
     Login,
-    SearchWrap
+    SearchWrap,
+    HotReccomend,
+    Arrow,
+    HotTitle,
+    ReccomendList,
+    ReccomendItem,
+    Refresh
 } from './style';
 const Header = (props) => {
-    const { isFocus,changeStatus } = props;
+    const { isFocus,mouseIn,currentPage,totalPage,changeStatus,getList,list,changeMouseIn,changeCurrentPage } = props;
+    const showTenDatas = () => {
+        let newList = [];
+        if(list.length) {
+            for(let i = (currentPage -1) * 10; i < currentPage * 10 ; i++) {
+                newList.push(<ReccomendItem key={list[i]}>{ list[i] }</ReccomendItem>)
+            }
+        }
+        return newList;
+    }
+    const handleChangePage = () => {
+        const icon = document.getElementById('icon');
+        const rotate = icon.style.transform;
+        console.log(rotate)
+        let angel = rotate.replace(/[^1-9]/ig,'');
+        if(angel) {
+            angel = Number(angel) + 360;
+        }else {
+            angel = 360;
+        }
+        icon.style.transform = `rotate(${angel}deg)`;
+        if(currentPage < totalPage) {
+            changeCurrentPage(currentPage + 1)
+        }else {
+            changeCurrentPage(1)
+        }
+    }
+    const toggleReccomendListByIsFocus = (isFocus) => {
+        if(isFocus || mouseIn) {
+            return (
+                <HotReccomend
+                    onMouseEnter={e => changeMouseIn(true)}
+                    onMouseLeave={ e => changeMouseIn(false)}
+                >
+                    <Arrow></Arrow>
+                    <HotTitle>
+                        <span className='left'>热门搜索</span>
+                        <span className='right' style={{display: 'flex',alignItems:'center'}} onClick={e => handleChangePage()}>
+                            <Refresh id="icon"></Refresh>
+                            换一批
+                        </span>
+                    </HotTitle>
+                    <ReccomendList>
+                        {showTenDatas()}
+                    </ReccomendList>
+                </HotReccomend>
+            )
+        }
+        return null;
+    }
+    const handleFocus = () => {
+        changeStatus(true);
+        getList();
+    }
     return (
         <div>
             <HeaderWraper>
@@ -38,11 +97,14 @@ const Header = (props) => {
                             >
                                 <SearchInput 
                                     className={isFocus  ? 'focus' : ''}
-                                    onFocus={e => changeStatus(true)}
+                                    onFocus={e => handleFocus()}
                                     onBlur={e => changeStatus(false)}
                                 />
                             </CSSTransition>
                             <i className={`iconfont iconfangdajing ${isFocus ? 'focus' : ''}`}></i>
+                            {
+                                toggleReccomendListByIsFocus(isFocus)
+                            }
                         </SearchWrap>
                     </CenterLeft>
                     <CenterRight>
@@ -62,4 +124,10 @@ const Header = (props) => {
     )
 }
 
-export default connect((state) => ({isFocus: state.header.isFocus}),action)(Header)
+export default connect((state) => ({
+    isFocus: state.header.isFocus,
+    list: state.header.list,
+    mouseIn: state.header.mouseIn,
+    currentPage: state.header.currentPage,
+    totalPage: state.header.totalPage
+}),action)(Header)

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import logoImg from '../../statics/logo.png';
+import refresh from '../../statics/refresh.png';
 export const HeaderWraper = styled.div`
     height: 57px;
     border-bottom: 1px solid #f0f0f0;
@@ -41,6 +42,65 @@ export const SearchWrap = styled.div `
         }
     }
 `
+export const HotReccomend = styled.div`
+    position: absolute;
+    width: 260px;
+    padding: 20px;
+    left: 0;
+    top: 48px;
+    background-color: #f3f0f0;
+    border-radius: 5px;
+`
+export const Arrow = styled.div`
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #eee;
+    left: 20px;
+    top: -20px;
+`
+export const HotTitle = styled.div`
+    display: flex;
+    justify-content: space-between;
+    color: #969696;
+    .left {
+        font-size: 13px;
+    }
+    .right {
+        font-size: 12px;
+    }
+`
+export const Refresh = styled.span`
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    background: url(${refresh});
+    background-size: contain;
+    transition: all .2s ease-out;
+    transform-origin: center center;
+`
+export const ReccomendList = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+`
+export const ReccomendItem = styled.a.attrs({
+    href: '/#'
+})`
+    display: block;
+    padding: 5px;
+    border: 1px solid #969696;
+    margin-right: 7px;
+    margin-bottom: 15px;
+    font-size: 12px;
+    color: #999;
+    border-radius: 3px;
+    text-decoration: none;
+`
+
 export const CenterLeft = styled.div `
     display: flex;
     align-items: center;
