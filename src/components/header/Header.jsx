@@ -32,6 +32,8 @@ const Header = (props) => {
             for(let i = (currentPage -1) * 10; i < currentPage * 10 ; i++) {
                 newList.push(<ReccomendItem key={list[i]}>{ list[i] }</ReccomendItem>)
             }
+
+            
         }
         return newList;
     }
