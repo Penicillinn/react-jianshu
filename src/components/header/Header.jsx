@@ -33,15 +33,14 @@ const Header = (props) => {
                 newList.push(<ReccomendItem key={list[i]}>{ list[i] }</ReccomendItem>)
             }
 
-            
+
         }
         return newList;
     }
     const handleChangePage = () => {
         const icon = document.getElementById('icon');
         const rotate = icon.style.transform;
-        console.log(rotate)
-        let angel = rotate.replace(/[^1-9]/ig,'');
+        let angel = rotate.replace(/[^0-9]/ig,'');
         if(angel) {
             angel = Number(angel) + 360;
         }else {
