@@ -21,3 +21,13 @@ export const ArticleImg = styled.div`
         height: 100:
     }
 `
+
+export const LoadMore = styled.div`
+    height: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    text-align: center;
+    background-color: #666;
+    color: #eee;
+    cursor: pointer;
+`

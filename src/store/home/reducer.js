@@ -10,6 +10,9 @@ export default (state = initialState,{type,data}) => {
             newState.list = data.topicList;
             newState.articleList = data.articleList;
             break;
+        case types.ADD_LOADMORE:
+            newState.articleList = [...newState.articleList,...data];
+            break;
         default:
             return newState;
     }
