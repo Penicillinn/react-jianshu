@@ -124,7 +124,7 @@ const Header = (props) => {
                     <Additionitem className="reg">注册</Additionitem>
                     <Additionitem className="write">
                         <i className='iconfont iconbi' style={{marginRight: '3px'}}></i>
-                        写文章
+                        <Link to='/write'>写文章</Link>
                     </Additionitem>
                 </Addition>
             </HeaderWraper>
