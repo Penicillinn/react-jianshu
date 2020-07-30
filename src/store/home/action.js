@@ -24,6 +24,12 @@ const action = {
             const { data } = await getLoadMore();
             dispatch(action.addLoadMore(data.data))
         }
+    },
+    changeBacktop(data) {
+        return {
+            type: types.TOGGLE_BACKTOP,
+            data
+        }
     }
 }
 
