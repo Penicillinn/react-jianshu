@@ -3,6 +3,7 @@ import {  CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { action } from '../../store/header';
+import { loginAction } from '../../store/login'
 import {
     HeaderWraper,
     Logo,
@@ -25,7 +26,7 @@ import {
     Refresh
 } from './style';
 const Header = (props) => {
-    const { isFocus,mouseIn,currentPage,totalPage,changeStatus,getList,list,changeMouseIn,changeCurrentPage } = props;
+    const { isFocus,mouseIn,isLogin,currentPage,totalPage,changeStatus,getList,list,changeMouseIn,changeCurrentPage,changeLoginStatus } = props;
     const showTenDatas = () => {
         let newList = [];
         if(list.length) {
@@ -80,6 +81,9 @@ const Header = (props) => {
         changeStatus(true);
         getList();
     }
+    const handleLogout = () => {
+        changeLoginStatus(false)
+    }
     return (
         <div>
             <HeaderWraper>
@@ -110,7 +114,10 @@ const Header = (props) => {
                     </CenterLeft>
                     <CenterRight>
                         <Aa>Aa</Aa>
-                        <Login>登录</Login>
+                        {
+                            isLogin ? <Login onClick={e => handleLogout()}>退出</Login> : <Link to='/login'><Login>登录</Login></Link>
+                        }
+                        
                     </CenterRight>
                 </Center>
                 <Addition>
@@ -130,5 +137,6 @@ export default connect((state) => ({
     list: state.header.list,
     mouseIn: state.header.mouseIn,
     currentPage: state.header.currentPage,
-    totalPage: state.header.totalPage
-}),action)(Header)
+    totalPage: state.header.totalPage,
+    isLogin: state.LoginReducer.isLogin
+}),{...action,...loginAction})(Header)
